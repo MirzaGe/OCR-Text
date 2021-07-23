@@ -20,11 +20,33 @@ class ViewController: UIViewController {
         }
         // URL Request
         
-        var request = URLRequest(url: <#T##URL#>, cachePolicy: <#T##URLRequest.CachePolicy#>, timeoutInterval: <#T##TimeInterval#>)
+        var request = URLRequest(url: url!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
         // Specify the Header
+        
+        let headers = [
+            "accept": "string",
+            "x-rapidapi-key": "139cacdf02mshac7b9ff1f5ff8b5p151be4jsn7e1d1d608b3d",
+            "x-rapidapi-host": "ocr-text-extractor.p.rapidapi.com"
+        ]
+        
+        request.allHTTPHeaderFields = headers
         
         // Specify The Body
         
+        
+        let jsonObject = [ "Uri": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+                           "Language": "string",
+                           "DetectOrientation": false,
+                           "Scale": false,
+                           "IsTable": false,
+                           "OcrEngine": "string"] as [String : Any]
+        
+        do {
+        let requestBody = try JSONSerialization.data(withJSONObject: jsonObject, options: .fragmentsAllowed)
+        }
+        catch {
+            print ("error ")
+        }
         
         // Set the request type
         
