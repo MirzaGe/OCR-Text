@@ -62,7 +62,6 @@ class ViewController: UIViewController {
         
         // create The data task
         let dataTask = session.dataTask(with: request) { (data, response, error) in
-            <#code#>
             
             
             
