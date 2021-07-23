@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         let url = URL (string:  "https://ocr-text-extractor.p.rapidapi.com/ocr-engines/list-options")
         guard url != nil else {
             print("error creating url object")
+            return
         }
         // URL Request
         
@@ -43,24 +44,48 @@ class ViewController: UIViewController {
         
         do {
         let requestBody = try JSONSerialization.data(withJSONObject: jsonObject, options: .fragmentsAllowed)
+            
+            request.httpBody = requestBody
+            
         }
         catch {
-            print ("error ")
+            print ("error creating the data object from the json")
         }
         
         // Set the request type
         
+        request.httpMethod = "POST"
         
         // Get the URL Session
         
+        let session = URLSession.shared
         
         // create The data task
-        
+        let dataTask = session.dataTask(with: request) { (data, response, error) in
+            <#code#>
+            
+            
+            
+            // check for errors
+            
+            if error == nil && data != nil {
+                
+                // try to parse out data
+                do {
+                let dictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? [String:Any]
+                    print(dictionary)
+                }
+                catch {
+                    print("Error parsing response data")
+                }
+                
+            }
+        }
         
         // fire off the data task
         
         
-        
+        dataTask.resume()
         
         
         
